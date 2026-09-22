@@ -24,7 +24,7 @@ pipeline {
 
         stage('Docker Build') {
             steps {
-                sh 'docker build -t my-java-app:latest .'
+                sh 'docker build -t shubhadashingane/task-pipeline:latest .'
             }
         }
 
