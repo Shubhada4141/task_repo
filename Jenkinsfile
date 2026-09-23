@@ -1,11 +1,10 @@
-
 pipeline {
 
     agent any
 
     stages {
 
-        stage('Checkout'){
+        stage('Checkout') {
             steps {
                 checkout scm
             }
@@ -23,28 +22,5 @@ pipeline {
             }
         }
 
-        stage('Docker Build') {
-            steps {
-                sh 'docker build -t shubhadashingane/task-management-system:latest .'
-            }
-        }
-
-        stage('Docker Push') {
-            steps {
-                withCredentials([
-                    usernamePassword(
-                        credentialsId: 'dockerhub-credentials',
-                        usernameVariable: 'DOCKER_USER',
-                        passwordVariable: 'DOCKER_PASSWORD'
-                    )
-                ]) {
-                    sh '''
-                        echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USER" --password-stdin
-                        docker push shubhadashingane/task-management-system:latest
-                    '''
-                }
-            }
-        }
     }
 }
-

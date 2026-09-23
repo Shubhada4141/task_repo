@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Management System</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+            <h1>Task Management System</h1>
+            <p>Manage your daily tasks easily</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Global Alert Box -->
+        <div id="alertMessage" class="alert"></div>
+
+        <div class="layout-grid">
+            <!-- Sidebar: Add / Edit Task Form -->
+            <div class="card">
+                <h2 class="card-title" id="formTitle">Add New Task</h2>
+                <form id="taskForm">
+                    <input type="hidden" id="taskId">
+
+                    <div class="form-group">
+                        <label for="title">Task Title *</label>
+                        <input type="text" id="title" class="form-control" placeholder="e.g. Complete DevOps Project" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="description">Description *</label>
+                        <textarea id="description" class="form-control" placeholder="e.g. Write Jenkinsfile and deploy to Kubernetes" required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="dueDate">Due Date *</label>
+                        <input type="date" id="dueDate" class="form-control" required>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="priority">Priority</label>
+                            <select id="priority" class="form-control">
+                                <option value="LOW">LOW</option>
+                                <option value="MEDIUM" selected>MEDIUM</option>
+                                <option value="HIGH">HIGH</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="status">Status</label>
+                            <select id="status" class="form-control">
+                                <option value="TODO" selected>TODO</option>
+                                <option value="IN_PROGRESS">IN_PROGRESS</option>
+                                <option value="COMPLETED">COMPLETED</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; gap: 8px;">
+                        <button type="submit" id="submitBtn" class="btn btn-primary">Add Task</button>
+                        <button type="button" id="cancelBtn" class="btn btn-secondary" style="display: none;" onclick="resetForm()">Cancel</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Main Content: Task List & Filters -->
+            <div>
+                <!-- Filter Navigation Bar -->
+                <div class="filter-bar">
+                    <span style="font-weight: 600; margin-right: 8px; font-size: 0.9rem; color: var(--text-secondary);">Filter Status:</span>
+                    <button class="filter-btn active" data-status="ALL" onclick="filterTasks('ALL')">All</button>
+                    <button class="filter-btn" data-status="TODO" onclick="filterTasks('TODO')">TODO</button>
+                    <button class="filter-btn" data-status="IN_PROGRESS" onclick="filterTasks('IN_PROGRESS')">IN_PROGRESS</button>
+                    <button class="filter-btn" data-status="COMPLETED" onclick="filterTasks('COMPLETED')">COMPLETED</button>
+                </div>
+
+                <!-- Container for Task Cards -->
+                <div id="taskList" class="task-list">
+                    <div class="empty-state">
+                        <p>Loading tasks...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript File -->
+    <script src="js/script.js"></script>
+</body>
+</html>
